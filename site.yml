@@ -11,3 +11,10 @@
       - colordiff
       - mysql-client
 
+  - name: Remove old docker package
+    apt: pkg={{ item }} autoremove=yes purge=yes force=yes update_cache=yes state=absent
+    with_items:
+      - docker
+      - docker-engine
+      - docker.io
+

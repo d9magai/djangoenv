@@ -36,3 +36,8 @@
       repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu zesty stable
       state: present
 
+  - name: Apt install docker-ce
+    apt: pkg={{ item }} force=yes update_cache=yes cache_valid_time=3600
+    with_items:
+      - docker-ce
+

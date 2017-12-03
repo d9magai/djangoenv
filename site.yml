@@ -7,9 +7,11 @@
     apt: pkg={{ item }} force=yes update_cache=yes cache_valid_time=3600
     with_items:
       - git
+      - python3-dev
       - nkf
       - colordiff
       - mysql-client
+      - libmysqlclient-dev
 
   - name: Remove old docker package
     apt: pkg={{ item }} autoremove=yes purge=yes force=yes update_cache=yes state=absent
@@ -40,4 +42,11 @@
     apt: pkg={{ item }} force=yes update_cache=yes cache_valid_time=3600
     with_items:
       - docker-ce
+
+  - name: Install global python requirements
+    pip: name={{item}} executable=pip3
+    with_items:
+      - django
+      - mysqlclient
+      - uwsgi
 

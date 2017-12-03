@@ -18,3 +18,11 @@
       - docker-engine
       - docker.io
 
+  - name: Apt install dep packages
+    apt: pkg={{ item }} force=yes update_cache=yes cache_valid_time=3600
+    with_items:
+      - curl
+      - apt-transport-https
+      - ca-certificates
+      - software-properties-common
+

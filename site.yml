@@ -50,3 +50,28 @@
       - mysqlclient
       - uwsgi
 
+######################################################
+# uwsgi demon
+######################################################
+
+  - name: uwsgi ini file directory
+    file: path=/etc/uwsgi state=directory owner=root group=root mode=0755
+
+  - name: vassals directory
+    file: path=/etc/uwsgi/vassals state=directory owner=root group=root mode=0755
+
+  - name: emperor ini file
+    copy: src=emperor.ini dest=/etc/uwsgi/emperor.ini
+
+  - name: uwsgi ini file
+    copy: src=uwsgi.ini dest=/etc/uwsgi/vassals/uwsgi.ini
+
+  - name: uwsgi demon
+    copy: src=uwsgi.service dest=/etc/systemd/system/uwsgi.service
+
+  - name: uwsgi demon start
+    service: name=uwsgi state=started
+
+  - name: uwsgi demon enable
+    service: name=uwsgi enabled=yes
+

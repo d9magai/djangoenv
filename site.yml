@@ -1,0 +1,13 @@
+---
+- hosts: 127.0.0.1
+  user: vagrant
+  sudo: yes
+  tasks:
+  - name: Apt install common packages
+    apt: pkg={{ item }} force=yes update_cache=yes cache_valid_time=3600
+    with_items:
+      - git
+      - nkf
+      - colordiff
+      - mysql-client
+

@@ -26,3 +26,9 @@
       - ca-certificates
       - software-properties-common
 
+  - name: Add an Apt signing key to a specific keyring file
+    apt_key:
+      id: 0EBFCD88
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+

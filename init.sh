@@ -13,6 +13,3 @@ if [ ! "$(sudo docker ps -q -f name=mysqld)" ]; then
     sudo docker run -p 3306:3306 --restart=always --name mysqld -e MYSQL_USER=user -e MYSQL_PASSWORD=secret -e MYSQL_ROOT_PASSWORD=password -e MYSQL_DATABASE=database -d mysql
 fi
 
-ln -sf  /vagrant $HOME/djangoenv
-sudo systemctl restart uwsgi
-

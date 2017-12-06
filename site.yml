@@ -9,6 +9,10 @@
       - python3-dev
       - libmysqlclient-dev
 
+######################################################
+# docker
+######################################################
+
   - name: Remove old docker package
     apt: pkg={{ item }} autoremove=yes purge=yes force=yes update_cache=yes state=absent
     with_items:
@@ -38,6 +42,10 @@
     apt: pkg={{ item }} force=yes update_cache=yes cache_valid_time=3600
     with_items:
       - docker-ce
+
+######################################################
+# python requirements
+######################################################
 
   - name: Install global python requirements
     pip: name={{item}} executable=pip3

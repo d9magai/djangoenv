@@ -8,6 +8,7 @@
     with_items:
       - python3-dev
       - libmysqlclient-dev
+      - uwsgi-plugin-python3
 
 ######################################################
 # docker

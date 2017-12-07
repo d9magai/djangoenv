@@ -65,6 +65,9 @@
   - name: vassals directory
     file: path=/etc/uwsgi/vassals state=directory owner=root group=root mode=0755
 
+  - name: uwsgi.sock directory
+    file: path=/var/uwsgi/ state=directory owner=www-data group=www-data mode=0755
+
   - name: emperor ini file
     copy: src=emperor.ini dest=/etc/uwsgi/emperor.ini
 

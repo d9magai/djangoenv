@@ -4,7 +4,7 @@ cd $(dirname $0)
 
 curl -sL bootstrap.pypa.io/get-pip.py | sudo python3
 pip install ansible --user
-~/.local/bin/ansible-playbook /vagrant/site.yml --connection=local
+~/.local/bin/ansible-playbook /vagrant/site.yml --connection=local --diff
 
 if [ ! "$(sudo docker ps -q -f name=mysqld)" ]; then
     if [ "$(sudo docker ps -aq -f status=exited -f name=mysqld)" ]; then

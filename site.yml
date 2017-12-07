@@ -79,3 +79,42 @@
   - name: uwsgi demon enable
     service: name=uwsgi enabled=yes
 
+######################################################
+# nginx install
+######################################################
+
+  - name : Add official nginx PGP key
+    apt_key:
+      url: http://nginx.org/keys/nginx_signing.key
+      state: present
+
+  - name : Add official nginx repository
+    lineinfile : >
+      dest=/etc/apt/sources.list
+      line='{{item}} http://nginx.org/packages/ubuntu/ {{ansible_distribution_release}} nginx'
+    with_items:
+      - deb
+      - deb-src
+    register: update_apt
+
+  - name: Update apt
+    apt: update_cache=yes
+    when: update_apt is defined and update_apt.changed == True
+
+  - name: Apt install nginx
+    apt: pkg={{ item }} force=yes update_cache=yes cache_valid_time=3600
+    with_items:
+      - nginx
+
+  - name: nginx start
+    service: name=nginx state=started
+
+  - name: nginx demon enable
+    service: name=nginx enabled=yes
+
+  - name: nginx conf file
+    copy: src=default.conf dest=/etc/nginx/conf.d/default.conf
+
+  - name: nginx conf file
+    copy: src=nginx.conf dest=/etc/nginx/nginx.conf
+
